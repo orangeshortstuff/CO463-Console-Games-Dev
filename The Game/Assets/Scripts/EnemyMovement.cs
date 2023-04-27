@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
-    private float speed = 3.0f;
+    private float speed = 2.0f;
     Vector2 direction;
     Vector2 dmov;
     float dt;
@@ -34,11 +34,18 @@ public class EnemyMovement : MonoBehaviour
             Vector2 back = (direction * speed * -0.04f);
             rb.position = (rb.position + back);
             GameObject player = GameObject.Find("Player");
-            float distx = (rb.position.x - player.transform.position.x);
-            Debug.Log(distx / Mathf.Abs(distx));
-            float disty = (rb.position.y - player.transform.position.y);
-            Debug.Log(disty / Mathf.Abs(disty));
-            direction = directionList[Random.Range(0,4)];
+            float distx = (player.transform.position.x - rb.position.x);
+            float disty = (player.transform.position.y - rb.position.y);
+            if (Mathf.Abs(distx) > Mathf.Abs(disty)) {
+                direction.x = Mathf.RoundToInt(Mathf.Sign(distx));
+                direction.y = 0;
+            } else {
+                direction.y = Mathf.RoundToInt(Mathf.Sign(disty));
+                direction.x = 0;
+            }
+            if (Random.Range(0,10) == 0) {
+                direction = directionList[Random.Range(0,4)];
+            }
         }
     }
 }
