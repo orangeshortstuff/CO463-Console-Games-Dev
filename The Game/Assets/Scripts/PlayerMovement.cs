@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "wall") {
             Vector2 back = (direction * speed * -0.04f);
             rb.position = (rb.position + back);
+            direction = Vector2.zero;
         }
     }
 }

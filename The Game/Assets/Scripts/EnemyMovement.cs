@@ -25,6 +25,18 @@ public class EnemyMovement : MonoBehaviour
         dt = Time.fixedDeltaTime;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);
+        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.05f ||
+            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.05f)
+        {
+            GetValidDirections();
+        }
+    }
+
+    // GetValidDirections casts rays to all four cardinal directions, looking for a node.
+    // This is then used to select the node nearest to the player.
+    private void GetValidDirections()
+    {
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
             GameObject player = GameObject.Find("Player");
             float distx = (player.transform.position.x - rb.position.x);
             float disty = (player.transform.position.y - rb.position.y);
-            if (Mathf.Abs(distx) > Mathf.Abs(disty)) {
+            if (Mathf.Abs(distx) < Mathf.Abs(disty)) {
                 direction.x = Mathf.RoundToInt(Mathf.Sign(distx));
                 direction.y = 0;
             } else {
