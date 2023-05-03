@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
-    private float speed = 2.0f;
+    public Collider2D box;
+    private float speed = 1.8f;
     Vector2 direction;
     Vector2 dmov;
     float dt;
@@ -25,8 +26,8 @@ public class EnemyMovement : MonoBehaviour
         dt = Time.fixedDeltaTime;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);
-        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.05f ||
-            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.05f)
+        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.12f &&
+            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.12f)
         {
             GetValidDirections();
         }
@@ -36,7 +37,46 @@ public class EnemyMovement : MonoBehaviour
     // This is then used to select the node nearest to the player.
     private void GetValidDirections()
     {
-        
+        Collider2D [] colliders = new Collider2D [directionList.Length];
+        Vector2 [] hit_points = new Vector2 [directionList.Length];
+        string [] tags = new string [directionList.Length];
+        int i = 0;
+        foreach (Vector2 dir in directionList)
+        {
+            Vector2 offset = dir * 0.33f;
+            RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, dir);
+            colliders[i] = hit.collider;
+            hit_points[i] = hit.point;
+            tags[i] = hit.collider.name.Substring(0,4); // first four characters of the name (wall / node / Play (for Player) )
+            i++;
+        }
+
+        //  check if one of the rays hit the player - if it did, move in that direction 
+        int castHitPlayer = System.Array.IndexOf(tags, "Play");
+        if (castHitPlayer >= 0)
+        {
+            direction = directionList[castHitPlayer];
+        }
+        else
+        {
+            Vector2 playerPos = GameObject.FindWithTag("Player").transform.position;
+            List<float> mags = new List<float>();
+            // calculate the distance between the player and any hit nodes
+            for (i = 0; i < tags.Length; i++)
+            {
+                if (tags[i] == "node")
+                {
+                    mags.Add((hit_points[i] - playerPos).magnitude);
+                }
+                else
+                {
+                    mags.Add(Mathf.Infinity);
+                }
+            }
+
+            // find the lowest distance, get that index, and turn it to a direction, so the enemy points that way
+            direction = directionList[mags.IndexOf(Mathf.Min(mags.ToArray()))];
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
