@@ -47,7 +47,8 @@ public class EnemyMovement : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, dir);
             colliders[i] = hit.collider;
             hit_points[i] = hit.point;
-            tags[i] = hit.collider.name.Substring(0,4); // first four characters of the name (wall / node / Play (for Player) )
+            tags[i] = hit.collider.tag;
+            Debug.Log(tags[i]);
             i++;
         }
 

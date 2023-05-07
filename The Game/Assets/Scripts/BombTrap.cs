@@ -17,7 +17,7 @@ public class BombTrap : MonoBehaviour
     void FixedUpdate()
     {
         timeSinceLastThrow += Time.fixedDeltaTime;
-        if (timeSinceLastThrow > 1)
+        if (timeSinceLastThrow > 2)
         {
             Instantiate(myPrefab, transform.position, transform.rotation, this.transform);
             timeSinceLastThrow = 0;

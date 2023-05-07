@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.W)) {
             direction = Vector2.up;
@@ -37,14 +37,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 position = rb.position;
-        dt = Time.fixedDeltaTime;
+        dt = Time.deltaTime;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "wall") {
-            Vector2 back = (direction * speed * -0.04f);
+            Vector2 back = (direction * speed * Time.deltaTime * -2.0f);
             rb.position = (rb.position + back);
             direction = Vector2.zero;
         }

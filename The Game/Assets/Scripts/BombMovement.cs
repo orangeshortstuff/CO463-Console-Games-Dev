@@ -9,6 +9,9 @@ public class BombMovement : MonoBehaviour
     Vector2 dmov;
     float dt;
     Vector2 direction;
+    bool hit = false;
+    float timeToExplode = 0.5f;
+    float timeOut;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D box;
 
@@ -20,10 +23,29 @@ public class BombMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        dt = Time.fixedDeltaTime;
+        dt = Time.deltaTime;
+        timeOut += dt;
         dmov = direction * speed * dt;
         rb.position = (rb.position + dmov);
+        if (hit)
+        {
+            timeToExplode -= dt;
+            if (timeToExplode <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        // figure out a way to make the explosion animation play
+        if (other.tag != "coin" && other.tag != "baddie" && other.tag != "node" && timeOut > 0.2f)
+        {
+            hit = true;
+            direction = Vector2.zero;
+        }
+
     }
 }
