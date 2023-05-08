@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -47,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
             Vector2 back = (direction * speed * Time.deltaTime * -2.0f);
             rb.position = (rb.position + back);
             direction = Vector2.zero;
+        }
+
+        if (other.gameObject.tag == "baddie")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

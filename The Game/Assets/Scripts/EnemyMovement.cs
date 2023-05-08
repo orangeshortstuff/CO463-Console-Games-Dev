@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private float speed = 1.8f;
     Vector2 direction;
     Vector2 dmov;
+    private float raycastCooldown = 0.3f;
     float dt;
     Vector2[] directionList = new Vector2[] {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
 
@@ -24,10 +25,12 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 position = rb.position;
         dt = Time.fixedDeltaTime;
+        raycastCooldown -= dt;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);
-        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.12f &&
-            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.12f)
+        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.2f &&
+            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.2f &&
+            raycastCooldown < 0)
         {
             GetValidDirections();
         }
@@ -44,16 +47,17 @@ public class EnemyMovement : MonoBehaviour
         foreach (Vector2 dir in directionList)
         {
             Vector2 offset = dir * 0.33f;
-            RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, dir);
+            // cast a ray in each direction, only returning results with a z position above 0 (to prevent coins from being hit)
+            RaycastHit2D hit = Physics2D.Raycast(rb.position + offset, dir, Mathf.Infinity, Physics2D.DefaultRaycastLayers, 0);
             colliders[i] = hit.collider;
             hit_points[i] = hit.point;
             tags[i] = hit.collider.tag;
-            Debug.Log(tags[i]);
+            // Debug.Log(tags[i]);
             i++;
         }
 
         //  check if one of the rays hit the player - if it did, move in that direction 
-        int castHitPlayer = System.Array.IndexOf(tags, "Play");
+        int castHitPlayer = System.Array.IndexOf(tags, "Player");
         if (castHitPlayer >= 0)
         {
             direction = directionList[castHitPlayer];
@@ -77,6 +81,7 @@ public class EnemyMovement : MonoBehaviour
 
             // find the lowest distance, get that index, and turn it to a direction, so the enemy points that way
             direction = directionList[mags.IndexOf(Mathf.Min(mags.ToArray()))];
+            raycastCooldown = 0.3f;
         }
     }
 
@@ -86,19 +91,7 @@ public class EnemyMovement : MonoBehaviour
         {
             Vector2 back = (direction * speed * -0.04f);
             rb.position = (rb.position + back);
-            GameObject player = GameObject.Find("Player");
-            float distx = (player.transform.position.x - rb.position.x);
-            float disty = (player.transform.position.y - rb.position.y);
-            if (Mathf.Abs(distx) < Mathf.Abs(disty)) {
-                direction.x = Mathf.RoundToInt(Mathf.Sign(distx));
-                direction.y = 0;
-            } else {
-                direction.y = Mathf.RoundToInt(Mathf.Sign(disty));
-                direction.x = 0;
-            }
-            if (Random.Range(0,10) == 0) {
-                direction = directionList[Random.Range(0,4)];
-            }
+            direction = directionList[Random.Range(0,4)];
         }
     }
 }

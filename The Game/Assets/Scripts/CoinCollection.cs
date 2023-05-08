@@ -20,8 +20,6 @@ public class CoinCollection : MonoBehaviour
         {
             //Add coin to counter
             totalCoins++;
-            //Print total number of coins
-            //Debug.Log("You currently have " + CoinCollection.totalCoins + " Coins.");
             //Destroy coin
             Destroy(gameObject);
         }
