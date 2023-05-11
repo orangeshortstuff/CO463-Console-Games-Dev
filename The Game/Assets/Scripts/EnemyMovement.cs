@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private float speed = 1.8f;
     Vector2 direction;
     Vector2 dmov;
-    private float raycastCooldown = 0.3f;
+    private float raycastCooldown = 0.1f;
     float dt;
     Vector2[] directionList = new Vector2[] {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
 
@@ -28,9 +28,8 @@ public class EnemyMovement : MonoBehaviour
         raycastCooldown -= dt;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);
-        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.2f &&
-            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.2f &&
-            raycastCooldown < 0)
+        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.12f &&
+            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.12f)
         {
             GetValidDirections();
         }
@@ -81,7 +80,7 @@ public class EnemyMovement : MonoBehaviour
 
             // find the lowest distance, get that index, and turn it to a direction, so the enemy points that way
             direction = directionList[mags.IndexOf(Mathf.Min(mags.ToArray()))];
-            raycastCooldown = 0.3f;
+            raycastCooldown = 0.1f;
         }
     }
 
