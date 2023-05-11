@@ -11,9 +11,6 @@ public class PlayerMovement : MonoBehaviour
     Vector2 dmov;
     float dt;
 
-    //Counts the total amount of coins picked up 
-    public static int totalCoins = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -56,17 +53,6 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "baddie")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            totalCoins = 0;
-        }
-
-        if (other.gameObject.tag == "coin")
-        {
-            //Add coin to counter
-            totalCoins++;
-            // turns off the coin, thus stopping it rendering
-            other.gameObject.SetActive(false);
-            //Destroy coin
-            Destroy(other);
         }
     }
 }

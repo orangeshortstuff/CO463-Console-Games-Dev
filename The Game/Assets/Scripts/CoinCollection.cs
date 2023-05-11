@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CoinCollection : MonoBehaviour
 {
+    //Counts the total amount of coins picked up 
+    public static int totalCoins = 0;
+
     void Awake()
     {
         //Make Collider2D a trigger 
@@ -15,6 +18,8 @@ public class CoinCollection : MonoBehaviour
         //Destroys the coin if the Object tagged Player comes in contact with it
         if (c2d.CompareTag("Player"))
         {
+            //Add coin to counter
+            totalCoins++;
             //Destroy coin
             Destroy(gameObject);
         }
