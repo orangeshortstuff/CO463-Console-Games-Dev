@@ -11,6 +11,7 @@ public class CoinCounter : MonoBehaviour
     void Start()
     {
         counterText = GetComponent<Text>();
+        CoinCollection.totalCoins = 0;
     }
 
     // Update is called once per frame

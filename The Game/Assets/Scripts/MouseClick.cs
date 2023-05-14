@@ -7,7 +7,6 @@ public class MouseClick : MonoBehaviour
     {
         if (this.name == "PlayButton")
         {
-
             SceneManager.LoadScene("Game");
         }
     }

@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
             colliders[i] = hit.collider;
             hit_points[i] = hit.point;
             tags[i] = hit.collider.tag;
-            // Debug.Log(tags[i]);
+            Debug.Log(hit_points[i]);
             i++;
         }
 
@@ -91,7 +91,7 @@ public class EnemyMovement : MonoBehaviour
         {
             Vector2 back = (direction * speed * -0.04f);
             rb.position = (rb.position + back);
-            direction = directionList[Random.Range(0,4)];
+            GetValidDirections();
         }
     }
 }
