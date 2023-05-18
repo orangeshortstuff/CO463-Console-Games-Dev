@@ -3671,12 +3671,12 @@ PrefabInstance:
     - target: {fileID: 5191986338623204109, guid: 8ce8091bce141bd4cb26e6d12cd3ab5e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5191986338623204109, guid: 8ce8091bce141bd4cb26e6d12cd3ab5e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5191986338623204111, guid: 8ce8091bce141bd4cb26e6d12cd3ab5e,
         type: 3}
@@ -4339,12 +4339,12 @@ PrefabInstance:
     - target: {fileID: 5191986338623204109, guid: 8ce8091bce141bd4cb26e6d12cd3ab5e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5191986338623204109, guid: 8ce8091bce141bd4cb26e6d12cd3ab5e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5191986338623204111, guid: 8ce8091bce141bd4cb26e6d12cd3ab5e,
         type: 3}
@@ -8482,12 +8482,12 @@ PrefabInstance:
     - target: {fileID: 5916908439243062857, guid: 974f4fd8fedd42145bc69a339288187b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5916908439243062857, guid: 974f4fd8fedd42145bc69a339288187b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5916908439243062859, guid: 974f4fd8fedd42145bc69a339288187b,
         type: 3}
@@ -10975,12 +10975,12 @@ PrefabInstance:
     - target: {fileID: 4472360611956242894, guid: a77196353ac1b4a4ca166a3d37212999,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4472360611956242894, guid: a77196353ac1b4a4ca166a3d37212999,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a77196353ac1b4a4ca166a3d37212999, type: 3}
