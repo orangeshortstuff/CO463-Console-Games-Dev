@@ -18,6 +18,7 @@ public class CoinCollection : MonoBehaviour
         //Destroys the coin if the Object tagged Player comes in contact with it
         if (c2d.CompareTag("Player"))
         {
+            SoundManager.instance.coinssource.PlayOneShot(SoundManager.instance.coinSound);
             //Add coin to counter
             totalCoins++;
             //Destroy coin

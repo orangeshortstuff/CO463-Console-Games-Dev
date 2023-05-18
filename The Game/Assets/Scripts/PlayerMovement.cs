@@ -43,8 +43,10 @@ public class PlayerMovement : MonoBehaviour
         rb.position = (position + dmov);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "wall") {
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.gameObject.tag == "wall") 
+        {
             Vector2 back = (direction * speed * Time.deltaTime * -2.0f);
             rb.position = (rb.position + back);
             direction = Vector2.zero;
