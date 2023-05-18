@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 150395248065852577}
   - component: {fileID: 150395248065852581}
   m_Layer: 0
-  m_Name: bomb
+  m_Name: Bomb
   m_TagString: baddie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

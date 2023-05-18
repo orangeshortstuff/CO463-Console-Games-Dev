@@ -3770,7 +3770,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9fe89d665c5a8714fb12a9e825b3fbfe, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4154,6 +4154,16 @@ PrefabInstance:
     - target: {fileID: 4809859763170187909, guid: 3f88dbdc57fd5c740a04f1dce0ca1e8a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809859763170187910, guid: 3f88dbdc57fd5c740a04f1dce0ca1e8a,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809859763170187910, guid: 3f88dbdc57fd5c740a04f1dce0ca1e8a,
+        type: 3}
+      propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4809859763170187913, guid: 3f88dbdc57fd5c740a04f1dce0ca1e8a,
@@ -8453,6 +8463,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5916908439243062856, guid: 974f4fd8fedd42145bc69a339288187b,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916908439243062856, guid: 974f4fd8fedd42145bc69a339288187b,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5916908439243062857, guid: 974f4fd8fedd42145bc69a339288187b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10935,6 +10955,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472360611956242893, guid: a77196353ac1b4a4ca166a3d37212999,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -56889451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472360611956242893, guid: a77196353ac1b4a4ca166a3d37212999,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4472360611956242894, guid: a77196353ac1b4a4ca166a3d37212999,
         type: 3}
