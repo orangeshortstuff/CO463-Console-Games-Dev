@@ -7,6 +7,7 @@ public class BombTrap : MonoBehaviour
     float timeSinceLastThrow;
     public GameObject myPrefab;
     Vector2 direction;
+    bool willThrow = false;
 
     private void Awake()
     {
@@ -22,8 +23,15 @@ public class BombTrap : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(position + (direction * 0.5f), direction, Mathf.Infinity, Physics2D.DefaultRaycastLayers, 0.15f);
         if (timeSinceLastThrow > 2 && hit.transform.CompareTag("Player"))
         {
+            timeSinceLastThrow = 0;
+            willThrow = true;
+        }
+
+        if (willThrow && timeSinceLastThrow > 0.5f) 
+        {
             Instantiate(myPrefab, transform.position, transform.rotation, this.transform);
             timeSinceLastThrow = 0;
+            willThrow = false;
         }
     }
 }

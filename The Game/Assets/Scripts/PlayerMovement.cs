@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     private float speed = 2.0f;
+    Vector2 position;
     Vector2 direction;
     Vector2 dmov;
     float dt;
@@ -15,29 +16,39 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent <Rigidbody2D> ();
+        position = rb.position;
     }
 
+    // ChangeDirectionIfFree is used to check if a player's move would hit a wall
+    void ChangeDirectionIfFree(Vector2 dir)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(position + (dir * 0.3f), dir, 0.4f, Physics2D.DefaultRaycastLayers, 0.25f);
+        if (hit.collider == null)
+        {
+            direction = dir;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
+        position = rb.position;
         if (Input.GetKeyDown(KeyCode.W)) {
-            direction = Vector2.up;
+            ChangeDirectionIfFree(Vector2.up);
         }
 
         if (Input.GetKeyDown(KeyCode.S)) {
-            direction = Vector2.down;
+            ChangeDirectionIfFree(Vector2.down);
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
-            direction = Vector2.left;
+            ChangeDirectionIfFree(Vector2.left);
         }
 
         if (Input.GetKeyDown(KeyCode.D)) {
-            direction = Vector2.right;
+            ChangeDirectionIfFree(Vector2.right);
         }
 
-        Vector2 position = rb.position;
         dt = Time.deltaTime;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);

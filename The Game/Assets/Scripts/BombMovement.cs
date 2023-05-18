@@ -5,7 +5,7 @@ using UnityEngine;
 public class BombMovement : MonoBehaviour
 {
     float timeMoved;
-    private float speed = 2f;
+    private float speed = 2.5f;
     Vector2 dmov;
     float dt;
     Vector2 direction;

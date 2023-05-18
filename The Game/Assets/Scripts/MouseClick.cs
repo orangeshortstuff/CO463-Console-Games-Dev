@@ -7,7 +7,7 @@ public class MouseClick : MonoBehaviour
     {
         if (this.name == "PlayButton")
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Level 1");
         }
     }
 }

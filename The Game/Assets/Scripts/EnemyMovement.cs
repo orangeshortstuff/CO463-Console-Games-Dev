@@ -9,8 +9,8 @@ public class EnemyMovement : MonoBehaviour
     private float speed = 1.8f;
     Vector2 direction;
     Vector2 dmov;
-    private float raycastCooldown = 0.3f;
     float dt;
+    float raycastCooldown = 0f;
     Vector2[] directionList = new Vector2[] {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
 
     // Start is called before the first frame update
@@ -28,18 +28,19 @@ public class EnemyMovement : MonoBehaviour
         raycastCooldown -= dt;
         dmov = direction * speed * dt;
         rb.position = (position + dmov);
-        if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) < 0.2f &&
-            Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) < 0.2f &&
-            raycastCooldown < 0)
+        if (Mathf.Abs(position.x - Mathf.Round(position.x)) < 0.12f &&
+        Mathf.Abs(position.y - Mathf.Round(position.y)) < 0.12f &&
+        raycastCooldown < 0)
         {
             GetValidDirections();
         }
     }
 
-    // GetValidDirections casts rays to all four cardinal directions, looking for a node.
-    // This is then used to select the node nearest to the player.
+    // GetValidDirections casts rays to all four cardinal directions, looking for nodes.
+    // It then selects the node closest to the player, and moves towards that node.
     private void GetValidDirections()
     {
+        raycastCooldown = 0.2f;
         Collider2D [] colliders = new Collider2D [directionList.Length];
         Vector2 [] hit_points = new Vector2 [directionList.Length];
         string [] tags = new string [directionList.Length];
@@ -52,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
             colliders[i] = hit.collider;
             hit_points[i] = hit.point;
             tags[i] = hit.collider.tag;
-            Debug.Log(hit_points[i]);
+            // Debug.Log(tags[i]);
             i++;
         }
 
@@ -81,7 +82,6 @@ public class EnemyMovement : MonoBehaviour
 
             // find the lowest distance, get that index, and turn it to a direction, so the enemy points that way
             direction = directionList[mags.IndexOf(Mathf.Min(mags.ToArray()))];
-            raycastCooldown = 0.3f;
         }
     }
 
@@ -91,6 +91,26 @@ public class EnemyMovement : MonoBehaviour
         {
             Vector2 back = (direction * speed * -0.04f);
             rb.position = (rb.position + back);
+            Vector2 correction;
+            if (Mathf.Abs(rb.position.x - Mathf.Round(rb.position.x)) > 0.12f)
+            {
+                correction.x = (rb.position.x + Mathf.Round(rb.position.x)) / 2;
+            } 
+            else
+            {
+                correction.x = rb.position.x;
+            }
+
+            if (Mathf.Abs(rb.position.y - Mathf.Round(rb.position.y)) > 0.12f)
+            {
+                correction.y = (rb.position.y + Mathf.Round(rb.position.y)) / 2;
+            }
+            else 
+            {
+                correction.y = rb.position.y;
+            }
+
+            rb.position = correction;
             GetValidDirections();
         }
     }
