@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-public class MouseClick : MonoBehaviour
+public class Level2Click : MonoBehaviour
 {
     public void OnMouseDown()
     {
-        if (this.name == "PlayButton")
+        if (this.name == "Level2")
         {
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadScene("Level 2");
         }
     }
 }
