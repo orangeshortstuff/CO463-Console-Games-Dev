@@ -65,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "baddie")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            PlayerManager.isGameOver = true;
+            gameObject.SetActive(false);
         }
     }
 }
