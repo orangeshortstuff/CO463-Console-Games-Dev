@@ -34,6 +34,11 @@ public class EnemyMovement : MonoBehaviour
         {
             GetValidDirections();
         }
+
+        if (PlayerManager.isGameOver)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     // GetValidDirections casts rays to all four cardinal directions, looking for nodes.

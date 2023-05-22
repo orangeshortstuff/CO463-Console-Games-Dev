@@ -12,16 +12,17 @@ public class BombTrap : MonoBehaviour
     private void Awake()
     {
         float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-        direction = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle) * -1);
+        direction = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle) * -1); // angle for the raycast (down at z = 0)
     }
 
-    // Update is called once per frame
+    // FixedUpdate is called 50 times / second
     void FixedUpdate()
     {
         timeSinceLastThrow += Time.fixedDeltaTime;
         Vector2 position = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(position + (direction * 0.5f), direction, Mathf.Infinity, Physics2D.DefaultRaycastLayers, 0.15f);
-        if (timeSinceLastThrow > 2 && hit.transform.CompareTag("Player"))
+        // if the cast ray hit the player, and it's not on cooldown, charge a bomb throw
+        if (timeSinceLastThrow > 2 && hit.transform.CompareTag("Player")) 
         {
             timeSinceLastThrow = 0;
             willThrow = true;
@@ -32,6 +33,11 @@ public class BombTrap : MonoBehaviour
             Instantiate(myPrefab, transform.position, transform.rotation, this.transform);
             timeSinceLastThrow = 0;
             willThrow = false;
+        }
+
+        if (PlayerManager.isGameOver)
+        {
+            gameObject.SetActive(false);
         }
     }
 }

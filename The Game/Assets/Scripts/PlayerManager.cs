@@ -6,14 +6,9 @@ public class PlayerManager : MonoBehaviour
     public static bool isGameOver;
     public GameObject gameOverScreen;
 
-     private void Awake()
-     {
-        isGameOver = false;
-     }
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        isGameOver = false;
     }
 
     // Update is called once per frame
