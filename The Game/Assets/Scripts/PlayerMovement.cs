@@ -7,10 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     private float speed = 2.0f;
-    Vector2 position;
-    Vector2 direction;
-    Vector2 dmov;
-    float dt;
+    public Vector2 position;
+    private Vector2 direction;
+    private Vector2 dmov;
+    private float dt;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerManager.isGameOver)
+        {
+            gameObject.SetActive(false);
+        }
+
         position = rb.position;
         if (Input.GetKeyDown(KeyCode.W)) {
             ChangeDirectionIfFree(Vector2.up);
@@ -66,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "baddie")
         {
             PlayerManager.isGameOver = true;
-            gameObject.SetActive(false);
         }
     }
 }

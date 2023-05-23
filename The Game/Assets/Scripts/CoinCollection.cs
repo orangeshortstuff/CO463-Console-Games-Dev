@@ -19,9 +19,10 @@ public class CoinCollection : MonoBehaviour
         if (c2d.CompareTag("Player"))
         {
             SoundManager.instance.coinssource.PlayOneShot(SoundManager.instance.coinSound);
-            //Add coin to counter
+            // Add coin to counter
             totalCoins++;
-            //Destroy coin
+
+            // Destroy coin
             Destroy(gameObject);
         }
     }
